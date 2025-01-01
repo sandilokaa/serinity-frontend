@@ -1,8 +1,8 @@
 import React from "react";
 
-const ButtonSubmit = ({ buttonName }) => {
+const ButtonSubmit = ({ buttonName, fontSize, fontWeight, width, borderRadius }) => {
     return (
-        <button className="bg-black border border-black text-white rounded-full py-2 px-6 font-medium text-[12px] hover:border hover:border-black hover:text-black hover:bg-white transition-all w-[150px]">
+        <button style={{fontSize: fontSize, fontWeight: fontWeight, width: width, borderRadius: borderRadius}} className="bg-black border border-black text-white py-2 px-6 hover:border hover:border-black hover:text-black hover:bg-white transition-all">
             {buttonName}
         </button>
     );

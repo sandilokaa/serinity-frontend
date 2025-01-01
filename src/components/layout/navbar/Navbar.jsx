@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import { ReactComponent as ArrowDownIcon } from "../../../assets/images/icons/arrow-down.svg";
 import { ReactComponent as SearchIcon } from "../../../assets/images/icons/search.svg";
@@ -8,12 +9,23 @@ import { ReactComponent as CartIcon } from "../../../assets/images/icons/cart.sv
 import ButtonAuth from "../../common/button/ButtonAuth";
 
 const Navbar = () => {
+
+    const navigate = useNavigate();
+
     return (
         <nav className="fixed top-0 z-50 shadow-md bg-white text-black w-full">
             <div className="mx-auto lg:px-20">
                 <div className="flex justify-between mx-auto h-20">
                     <div className="flex items-center gap-x-10">
-                        <div className="flex items-center">
+                        <div 
+                            className="flex items-center cursor-pointer" 
+                            onClick={() => { 
+                                navigate('/');
+                                setTimeout(() => {
+                                    window.scrollTo(0, 0);
+                                }, 100);
+                            }}
+                        >
                             <p className="text-2xl font-bold">SERINITY</p>
                         </div>
                         <div className="flex items-center gap-x-[25px] text-base">

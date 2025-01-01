@@ -69,10 +69,14 @@ const Footer = () => {
                             <div>
                                 <p>Enter your email address to get updated information on Sales and Offers.</p>
                             </div>
-                            <div className="flex gap-x-6">
+                            <div className="flex gap-x-[10px]">
                                 <SubscribeInput />
                                 <ButtonSubmit
                                     buttonName="SUBSCRIBE"
+                                    fontSize="12px"
+                                    fontWeight="500"
+                                    width="180px"
+                                    borderRadius="50px"
                                 />
                             </div>
                         </div>

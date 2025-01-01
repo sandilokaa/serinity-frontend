@@ -69,7 +69,7 @@ const ModalItemDetail = ({ onClose, productId }) => {
                                 <p>{product?.description}</p>
                             </div>
                             <div className="flex flex-col gap-y-[10px]">
-                                <p className="font-bold">Available Color</p>
+                                <p className="font-bold">Color</p>
                                 <div className="flex justify-center items-center border border-black w-[40px] h-[40px] rounded-full">
                                     <div style={{ background: selectedColor }} className="w-[30px] h-[30px] rounded-full"></div>
                                 </div>

@@ -5,7 +5,6 @@ import { fetchDataCloth, selectNewArrivalProducts, selectNewArrivalProductsStatu
 
 import { ReactComponent as SearchIcon } from "../../assets/images/icons/search.svg";
 import { ReactComponent as WishlistIcon } from "../../assets/images/icons/wishlist.svg";
-import { ReactComponent as CartIcon } from "../../assets/images/icons/cart.svg";
 
 import CurrencyFormatter from "../../assets/js/CurrencyFormatter";
 import ModalItemDetail from "../../components/common/modal/ModalItemDetail";
@@ -16,7 +15,8 @@ const HomeItem = () => {
 
     const [isHovered, setIsHovered] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedProductId, setSelectedProductId] = useState(null)
+    const [selectedProductId, setSelectedProductId] = useState(null);
+    const [imageHovered, setImageHovered] = useState(null);
 
     const dispatch = useDispatch();
     const products = useSelector(selectNewArrivalProducts);
@@ -28,15 +28,20 @@ const HomeItem = () => {
         }
     }, [productsStatus, dispatch]);
 
+    const handleMouseEnterImage = () => setImageHovered(true);
+    const handleMouseLeaveImage = () => setImageHovered(false);
+
+    const imageUrl = products[0]?.images.length > 0 ? (imageHovered ? products[0].images[1]?.image_url : products[0].images[0]?.image_url) : '';
+
     return (
         <div className="mt-24">
-            {isModalOpen && 
-                <ModalItemDetail 
+            {isModalOpen &&
+                <ModalItemDetail
                     onClose={() => {
                         setIsModalOpen(false)
-                        }
-                    } 
-                    productId={selectedProductId} 
+                    }
+                    }
+                    productId={selectedProductId}
                 />
             }
             <div className="lg:px-20">
@@ -47,14 +52,24 @@ const HomeItem = () => {
                 <div className="mt-10">
                     <div className="grid grid-cols-4 justify-between gap-y-10 gap-x-5">
                         {products.map(product => (
-                            <div 
-                                className="relative group" 
-                                key={product.id} 
+                            <div
+                                className="relative group"
+                                key={product.id}
                                 onClick={() => {
                                     navigate(`/item/detail/${product.id}`);
+                                    setTimeout(() => {
+                                        window.scrollTo(0, 0);
+                                    }, 100);
                                 }}
+                                onMouseEnter={handleMouseEnterImage}
+                                onMouseLeave={handleMouseLeaveImage}
                             >
-                                <img src={`http://localhost:8080/${product.image_url}`} alt="img" className="w-full transition-transform ease-in-out transform group-hover:scale-105" loading="lazy" />
+                                <img
+                                    src={`http://localhost:8080/${imageUrl}`}
+                                    alt="img"
+                                    loading="lazy"
+                                    className="w-full rounded-[20px]"
+                                />
                                 <div className="absolute flex justify-start top-0 w-auto h-auto">
                                     {product.sale === true ? (
                                         <div className="bg-[#5184AE]">
@@ -62,7 +77,7 @@ const HomeItem = () => {
                                         </div>
                                     ) : null}
                                 </div>
-                                <div className="absolute inset-0 top-10 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer z-10">
+                                <div className="absolute inset-0 top-10 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer z-10 mr-5 d">
                                     <div className="flex flex-col gap-y-[10px]">
                                         <div className="flex items-center justify-end">
                                             {isHovered === 'wishlist' && (
@@ -76,20 +91,6 @@ const HomeItem = () => {
                                                 onMouseLeave={() => setIsHovered(null)}
                                             >
                                                 <WishlistIcon className="transition colors duration-0" />
-                                            </button>
-                                        </div>
-                                        <div className="flex items-center justify-end">
-                                            {isHovered === 'cart' && (
-                                                <span className="mr-4 bg-black text-white px-2 py-1">
-                                                    Add to Cart
-                                                </span>
-                                            )}
-                                            <button
-                                                className="flex justify-center items-center h-[35px] w-[35px] bg-white rounded-full shadow-md hover:bg-black hover:text-white transition-colors duration-0 hover:shadow-md"
-                                                onMouseEnter={() => setIsHovered('cart')}
-                                                onMouseLeave={() => setIsHovered(null)}
-                                            >
-                                                <CartIcon className="transition colors duration-0" />
                                             </button>
                                         </div>
                                         <div className="flex items-center justify-end">

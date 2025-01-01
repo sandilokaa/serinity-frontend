@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { fetchDataClothDetail, selectClothDetail, resetProductDetail } from "../../redux/slices/ItemDetailSlice";
+
 import CurrencyFormatter from "../../assets/js/CurrencyFormatter";
+import ButtonSubmit from "../../components/common/button/ButtonSubmit";
+
+import { ReactComponent as WishlistIcon } from "../../assets/images/icons/wishlist.svg";
 
 const ItemDestination = () => {
 
@@ -29,25 +33,20 @@ const ItemDestination = () => {
     return (
         <div className="pt-20">
             <div className="lg:px-20 pt-12">
-                <div className="grid grid-cols-2 gap-x-5 mt-5">
-                    <div className="flex items-center justify-center w-full h-[420px] bg-[#F2F2F2] py-5 px-10 rounded-[20px]">
-                        <div>
-                            {product.images && product.images.length > 0 && product.images[0].image_url ? (
-                                <img
-                                    src={`http://localhost:8080/${product.images[0].image_url}`}
-                                    alt="img"
-                                    className="w-full lg:h-[420px]"
-                                    style={{
-                                        mixBlendMode: 'multiply'
-                                    }}
-                                />
-                            ) : (
-                                <p>No image available</p>
-                            )}
-                            <div>
-                                
-                            </div>
-                        </div>
+                <div className="grid grid-cols-2 gap-x-5">
+                    <div className="flex items-center justify-center w-full h-[580px] border border-black py-5 px-10 rounded-[5px]">
+                        {product.images && product.images.length > 0 && product.images[0].image_url ? (
+                            <img
+                                src={`http://localhost:8080/${product.images[0].image_url}`}
+                                alt="img"
+                                className="w-full lg:h-[550px]"
+                                style={{
+                                    mixBlendMode: 'multiply'
+                                }}
+                            />
+                        ) : (
+                            <p>No image available</p>
+                        )}
                     </div>
                     <div className="flex items-center">
                         <div className="flex flex-col gap-y-[10px]">
@@ -66,7 +65,7 @@ const ItemDestination = () => {
                                 <p>{product?.description}</p>
                             </div>
                             <div className="flex flex-col gap-y-[10px]">
-                                <p className="font-bold">Available Color</p>
+                                <p className="font-bold">Color</p>
                                 <div className="flex justify-center items-center border border-black w-[40px] h-[40px] rounded-full">
                                     <div style={{ background: selectedColor }} className="w-[30px] h-[30px] rounded-full"></div>
                                 </div>
@@ -95,6 +94,33 @@ const ItemDestination = () => {
                                         </div>
                                     ) : null}
                                 </div>
+                            </div>
+                            <div className="flex flex-col gap-y-[10px]">
+                                <p className="font-bold">Size Chart</p>
+                                <p className="text-blue-500 cursor-pointer">Click to see size chart</p>
+                            </div>
+                            <div className="flex gap-x-[10px] mt-5">
+                                <div className="flex items-center">
+                                    <div className="flex items-center border border-black h-full rounded-[5px] py-2 px-4 cursor-pointer">
+                                        <WishlistIcon />
+                                    </div>
+                                </div>
+                                <div className="flex items-center flex-grow">
+                                    <ButtonSubmit
+                                        buttonName="Checkout Now"
+                                        fontSize="16px"
+                                        width="100%"
+                                        borderRadius="5px"
+                                    />
+                                </div>
+                                <div className="flex items-center">
+                                    <div className="flex items-center border border-black h-full rounded-[5px] py-2 px-4 cursor-pointer">
+                                        <WishlistIcon />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex mt-2">
+                                <p>Estimated delivery: <strong>1 - 7 days</strong></p>
                             </div>
                         </div>
                     </div>

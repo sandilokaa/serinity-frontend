@@ -16,13 +16,17 @@ const clothDetailSlice = createSlice({
     initialState: {
         data: {},
         status: 'idle',
-        error: null
+        error: null,
+        currentCategory: null
     },
     reducers: {
         resetProductDetail: (state) => {
             state.data = {};
             state.status = 'idle';
         },
+        setCurrentCategory: (state, action) => {
+            state.data = action.payload;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -32,6 +36,7 @@ const clothDetailSlice = createSlice({
             .addCase(fetchDataClothDetail.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.data = action.payload;
+                state.currentCategory = action.payload.category
             })
             .addCase(fetchDataClothDetail.rejected, (state, action) => {
                 state.status = 'failed';
@@ -40,8 +45,9 @@ const clothDetailSlice = createSlice({
     },
 });
 
-export const { resetProductDetail } = clothDetailSlice.actions;
+export const { resetProductDetail, setCurrentCategory } = clothDetailSlice.actions;
 export const selectClothDetail = (state) => state.clothDetail.data;
 export const selectClothDetailStatus = (state) => state.clothDetail.status;
+export const selectCurrentCategory = (state) => state.clothDetail.currentCategory;
 
 export default clothDetailSlice.reducer;

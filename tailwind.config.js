@@ -6,6 +6,9 @@ module.exports = {
     "./src/**/**/**/*.{js,jsx,ts,tsx}",
     "./src/assets/style/*.{css}",
   ],
+  safelist: [
+    { pattern: /max-h-\d+/ },
+  ],
   theme: {
     extend: {
       fontFamily: {

@@ -3,9 +3,7 @@ import axios from "axios";
 
 export const fetchData = createAsyncThunk('/data/fetchData', async({name, category}) => {
     try {
-        const response = await axios.get(`http://localhost:8080/api/v1/items?` + (category? `category=${category}` : '') + (name ? `&name=${name}` : ''));
-        console.log(response.data.data);
-        
+        const response = await axios.get(`http://localhost:8080/api/v1/items?` + (category? `category=${category}` : '') + (name ? `&name=${name}` : ''));        
         return response.data.data;
     } catch (error) {
         console.log('API Error:', error.message);

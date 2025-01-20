@@ -72,7 +72,7 @@ const Footer = () => {
                             <div className="flex gap-x-[10px]">
                                 <SubscribeInput />
                                 <ButtonSubmit
-                                    buttonName="SUBSCRIBE"
+                                    buttonName="Subscribe"
                                     fontSize="12px"
                                     fontWeight="500"
                                     width="180px"

@@ -7,7 +7,7 @@ import { ReactComponent as SearchIcon } from "../../assets/images/icons/search.s
 import { ReactComponent as WishlistIcon } from "../../assets/images/icons/wishlist.svg";
 
 import CurrencyFormatter from "../../assets/js/CurrencyFormatter";
-import ModalItemDetail from "../../components/common/modal/ModalItemDetail";
+import ModalItemDetail from "../modal/ModalItemDetail";
 
 const HomeItem = () => {
 

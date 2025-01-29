@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { fetchDataClothDetail, selectClothDetail, resetProductDetail } from "../../redux/slices/ItemDetailSlice";
-import ModalChartNote from "../../components/common/modal/ModalChartNote";
+import ModalChartNote from "../modal/ModalChartNote";
 
 
 import CurrencyFormatter from "../../assets/js/CurrencyFormatter";

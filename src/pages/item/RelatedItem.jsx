@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchData, selectSearchItemProducts, selectSearchItemProductsStatus } from "../../redux/slices/SearchItemSlice";
 import { selectCurrentCategory } from "../../redux/slices/ItemDetailSlice";
 
-import ModalItemDetail from "../../components/common/modal/ModalItemDetail";
+import ModalItemDetail from "../modal/ModalItemDetail";
 import CurrencyFormatter from "../../assets/js/CurrencyFormatter";
 
 import { ReactComponent as SearchIcon } from "../../assets/images/icons/search.svg";

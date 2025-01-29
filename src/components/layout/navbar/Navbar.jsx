@@ -1,17 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { ReactComponent as ArrowDownIcon } from "../../../assets/images/icons/arrow-down.svg";
-import { ReactComponent as SearchIcon } from "../../../assets/images/icons/search.svg";
-import { ReactComponent as WishlistIcon } from "../../../assets/images/icons/wishlist.svg";
-import { ReactComponent as CartIcon } from "../../../assets/images/icons/cart.svg";
-
-import LoginModal from "../../common/modal/LoginModal";
-import RegisterModal from "../../common/modal/RegisterModal";
-import SearchModal from "../../common/modal/SearchModal";
-import BagModal from "../../common/modal/BagModal";
-
-import ButtonAuth from "../../common/button/ButtonAuth";
+import LoginModal from "../../../pages/modal/LoginModal";
+import RegisterModal from "../../../pages/modal/RegisterModal";
+import SearchModal from "../../../pages/modal/SearchModal";
+import BagModal from "../../../pages/modal/BagModal";
+import ForgotPassword from "../../../pages/modal/ForgotPassword";
 
 const Navbar = () => {
 
@@ -21,6 +15,8 @@ const Navbar = () => {
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
     const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
     const [isBagModalOpen, setIsBagModalOpen] = useState(false);
+    const [isForgotPasswordModalOpen, setIsForgotPasswordModalOpen] = useState(false);
+
     const [isSwitching, setIsSwitching] = useState(false);
 
     return (
@@ -33,6 +29,13 @@ const Navbar = () => {
                         setTimeout(() => {
                             setIsLoginModalOpen(false);
                             setIsRegisterModalOpen(true);
+                            setIsSwitching(false);
+                        }, 0)
+                    }}
+                    onSwitchToForgotPassword={() => {
+                        setTimeout(() => {
+                            setIsLoginModalOpen(false);
+                            setIsForgotPasswordModalOpen(true);
                             setIsSwitching(false);
                         }, 0)
                     }}
@@ -49,6 +52,34 @@ const Navbar = () => {
                             setIsSwitching(false)
                         }, 0)
                     }}
+                    onSwitchToForgotPassword={() => {
+                        setTimeout(() => {
+                            setIsRegisterModalOpen(false);
+                            setIsForgotPasswordModalOpen(true);
+                            setIsSwitching(false);
+                        }, 0)
+                    }}
+                />
+            }
+            {isForgotPasswordModalOpen &&
+                <ForgotPassword
+                    onClose={() => setIsForgotPasswordModalOpen(false)}
+                    onSwitchToLogin={() => {
+                        setIsSwitching(true);
+                        setTimeout(() => {
+                            setIsForgotPasswordModalOpen(false);
+                            setIsLoginModalOpen(true);
+                            setIsSwitching(false)
+                        }, 0)
+                    }}
+                    onSwitchToRegister={() => {
+                        setIsSwitching(true);
+                        setTimeout(() => {
+                            setIsForgotPasswordModalOpen(false);
+                            setIsRegisterModalOpen(true);
+                            setIsSwitching(false);
+                        }, 0)
+                    }}
                 />
             }
             {isSearchModalOpen &&
@@ -61,11 +92,24 @@ const Navbar = () => {
                     onClose={() => setIsBagModalOpen(false)}
                 />
             }
+
+
             <div className="mx-auto lg:px-20">
-                <div className="flex justify-between mx-auto h-20">
-                    <div className="flex items-center gap-x-10">
-                        <div
-                            className="flex items-center cursor-pointer"
+                <div className="flex items-center justify-between mx-auto h-20">
+                    <div
+                        className="flex items-center cursor-pointer"
+                        onClick={() => {
+                            navigate('/');
+                            setTimeout(() => {
+                                window.scrollTo(0, 0);
+                            }, 100);
+                        }}
+                    >
+                        <p className="text-2xl font-bold">SERINITY</p>
+                    </div>
+                    <div className="flex items-center gap-x-[25px] text-base">
+                        <p
+                            className="cursor-pointer hover:text-gray-700 transition"
                             onClick={() => {
                                 navigate('/');
                                 setTimeout(() => {
@@ -73,30 +117,35 @@ const Navbar = () => {
                                 }, 100);
                             }}
                         >
-                            <p className="text-2xl font-bold">SERINITY</p>
-                        </div>
-                        <div className="flex items-center gap-x-[25px] text-base">
-                            <div className="flex items-center gap-x-[5px] cursor-pointer">
-                                <a href="#home">Collections</a>
-                                <ArrowDownIcon />
-                            </div>
-                            <a href="#home">New Arrivals</a>
-                            <a href="#home">Lookbook</a>
-                            <a href="#home">Sale</a>
-                            <a href="#home">About</a>
-                            <a href="#home">Contact</a>
-                        </div>
+                            BERANDA -
+                        </p>
+                        <p
+                            className="cursor-pointer hover:text-gray-700 transition"
+                            onClick={() => {
+                                navigate('/shop');
+                                setTimeout(() => {
+                                    window.scrollTo(0, 0);
+                                }, 100);
+                            }}
+                        >
+                            SHOP -
+                        </p>
+                        <p
+                            className="cursor-pointer hover:text-gray-700 transition"
+                            onClick={() => {
+                                navigate('/');
+                                setTimeout(() => {
+                                    window.scrollTo(0, 0);
+                                }, 100);
+                            }}
+                        >
+                            SUPPORT -
+                        </p>
                     </div>
-                    <div className="flex items-center gap-x-[15px]">
-                        <div className="flex items-center gap-x-[15px]">
-                            <SearchIcon className="cursor-pointer" onClick={() => setIsSearchModalOpen(true)}/>
-                            <WishlistIcon className="cursor-pointer" />
-                            <CartIcon className="cursor-pointer" onClick={() => setIsBagModalOpen(true)}/>
-                        </div>
-                        <ButtonAuth
-                            buttonName="Account"
-                            onClick={() => setIsLoginModalOpen(true)}
-                        />
+                    <div className="flex items-center gap-x-[25px]">
+                        <p className="cursor-pointer hover:text-gray-700 transition" onClick={() => setIsSearchModalOpen(true)}>SEARCH</p>
+                        <p className="cursor-pointer hover:text-gray-700 transition" onClick={() => setIsBagModalOpen(true)}>BAG<span className="text-sm">(0)</span></p>
+                        <p className="cursor-pointer hover:text-gray-700 transition" onClick={() => setIsLoginModalOpen(true)}>ACCOUNT</p>
                     </div>
                 </div>
             </div>
